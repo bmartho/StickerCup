@@ -20,11 +20,11 @@ class AlbumFragment : Fragment() {
         binding = FragmentAlbumBinding.inflate(inflater, container, false)
 
         val list = listOf(
-            AlbumStickerButton(requireContext(), 1),
-            AlbumStickerButton(requireContext(), 2),
-            AlbumStickerButton(requireContext(), 3),
-            AlbumStickerButton(requireContext(), 4),
-            AlbumStickerButton(requireContext(), 5)
+            AlbumStickerButton(requireContext(), 1, false),
+            AlbumStickerButton(requireContext(), 2, false),
+            AlbumStickerButton(requireContext(), 3, false),
+            AlbumStickerButton(requireContext(), 4, true),
+            AlbumStickerButton(requireContext(), 5, false)
         )
 
         context?.let {

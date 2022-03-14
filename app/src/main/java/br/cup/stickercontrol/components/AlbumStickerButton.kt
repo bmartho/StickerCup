@@ -1,35 +1,45 @@
 package br.cup.stickercontrol.components
 
+import android.annotation.SuppressLint
 import android.content.Context
-import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import br.cup.stickercontrol.R
 
-class AlbumStickerButton : ConstraintLayout {
-    constructor(context: Context, stickerNumber: Int) : super(context) {
-        init(context, stickerNumber)
+@SuppressLint("ViewConstructor")
+class AlbumStickerButton(
+    context: Context,
+    private val stickerNumber: Int,
+    private var isMarked: Boolean
+) : ConstraintLayout(context) {
+    private lateinit var sticker: TextView
+
+    init {
+        init(context)
     }
 
-    constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
-        init(context, 0)
-    }
-
-    constructor(context: Context, attrs: AttributeSet, defStyle: Int) : super(
-        context,
-        attrs,
-        defStyle
-    ) {
-        init(context, 0)
-    }
-
-    private fun init(context: Context, stickerNumber: Int) {
+    private fun init(context: Context) {
         val inflater: LayoutInflater =
             context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         inflater.inflate(R.layout.album_sticker_button_component, this)
 
-        val sticker = findViewById<TextView>(R.id.sticker)
+        sticker = findViewById(R.id.sticker)
         sticker.text = stickerNumber.toString()
+
+        setBackgroundColor(getStickerColor())
+        setOnClickListener(::stickerClick)
+    }
+
+    private fun stickerClick(view: View) {
+        isMarked = !isMarked
+        view.setBackgroundColor(getStickerColor())
+    }
+
+    private fun getStickerColor() = if (isMarked) {
+        resources.getColor(R.color.marked_sticker, null)
+    } else {
+        resources.getColor(R.color.white, null)
     }
 }
