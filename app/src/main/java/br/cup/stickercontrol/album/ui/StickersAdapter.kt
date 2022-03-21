@@ -9,6 +9,7 @@ import br.cup.stickercontrol.components.AlbumStickerButton
 class StickersAdapter constructor(
     private val listStickers: List<AlbumStickerButton>
 ) : BaseAdapter() {
+    private var isRepeatedTab = false
 
     override fun getCount(): Int {
         return listStickers.size
@@ -23,6 +24,12 @@ class StickersAdapter constructor(
     }
 
     override fun getView(i: Int, view: View?, viewGroup: ViewGroup?): View {
+        listStickers[i].setRepeatedTab(isRepeatedTab)
         return listStickers[i]
+    }
+
+    fun setRepeatedTab(value: Boolean) {
+        isRepeatedTab = value
+        notifyDataSetChanged()
     }
 }

@@ -8,7 +8,30 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/mainFragment"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_width="match_parent"/>
+        android:layout_marginBottom="@dimen/tab_layout_layout_height"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/tab_layout_layout_height"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/GluedTab"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/album_tab" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/RepeatedTab"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/repeated_tab" />
+    </com.google.android.material.tabs.TabLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

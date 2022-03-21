@@ -6,8 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
-import br.cup.stickercontrol.StickerControlApplication
+import androidx.lifecycle.ViewModelProvider
 import br.cup.stickercontrol.components.AlbumStickerButton
 import br.cup.stickercontrol.databinding.FragmentAlbumBinding
 import br.cup.stickercontrol.model.Sticker
@@ -17,10 +16,10 @@ class AlbumFragment : Fragment(), UpdateStickerInterface {
 
     private lateinit var binding: FragmentAlbumBinding
     private lateinit var appContext: Context
+    private lateinit var adapter: StickersAdapter
+    private var stickerList: List<Sticker> = listOf()
 
-    private val albumViewModel: AlbumViewModel by viewModels {
-        AlbumViewModelFactory((requireActivity().application as StickerControlApplication).repository)
-    }
+    private lateinit var albumViewModel: AlbumViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,19 +31,30 @@ class AlbumFragment : Fragment(), UpdateStickerInterface {
             appContext = it
         }
 
+        albumViewModel = ViewModelProvider(requireActivity()).get(AlbumViewModel::class.java)
+
         albumViewModel.allStickers.observe(requireActivity()) { allStickers ->
+            stickerList = allStickers
             if (allStickers.isNotEmpty()) {
-                binding.mainGrid.adapter =
-                    StickersAdapter(buildAlbumStickerButtonObjects(allStickers))
+                adapter = StickersAdapter(buildAlbumStickerButtonObjects(allStickers))
+                binding.mainGrid.adapter = adapter
 
                 albumViewModel.allStickers.removeObservers(requireActivity())
+            }
+        }
+
+        albumViewModel.isRepeatedTab.observe(requireActivity()) { isRepeatedTab ->
+            if (stickerList.isNotEmpty()) {
+                adapter.setRepeatedTab(isRepeatedTab)
             }
         }
 
         return binding.root
     }
 
-    private fun buildAlbumStickerButtonObjects(listStickers: List<Sticker>): List<AlbumStickerButton> {
+    private fun buildAlbumStickerButtonObjects(
+        listStickers: List<Sticker>
+    ): List<AlbumStickerButton> {
         val list = mutableListOf<AlbumStickerButton>()
         listStickers.forEach { sticker ->
             list.add(AlbumStickerButton(appContext, sticker, this))

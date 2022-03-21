@@ -16,22 +16,46 @@ class AlbumStickerButton(
     private val stickerBD: Sticker,
     private val updateSticker: UpdateStickerInterface
 ) : ConstraintLayout(context) {
-    private lateinit var sticker: TextView
+    private var gluedStickerNumber: TextView
+    private var repeatedContainer: ConstraintLayout
 
     init {
-        init(context)
-    }
-
-    private fun init(context: Context) {
         val inflater: LayoutInflater =
             context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        inflater.inflate(R.layout.album_sticker_button_component, this)
+        inflater.inflate(R.layout.sticker_component, this)
 
-        sticker = findViewById(R.id.sticker)
-        sticker.text = stickerBD.number
+        gluedStickerNumber = findViewById(R.id.glued_sticker_number)
+        repeatedContainer = findViewById(R.id.repeated_sticker_container)
 
+        init()
+    }
+
+    private fun init(isRepeatedTab: Boolean = false) {
+        if (isRepeatedTab) {
+            configureRepeatedSticker()
+        } else {
+            configureGluedSticker()
+        }
+    }
+
+    private fun configureGluedSticker() {
+        gluedStickerNumber.visibility = VISIBLE
+        repeatedContainer.visibility = GONE
+
+        gluedStickerNumber.text = stickerBD.number
         setBackgroundColor(getStickerColor())
         setOnClickListener(::stickerClick)
+    }
+
+    private fun configureRepeatedSticker() {
+        gluedStickerNumber.visibility = GONE
+        repeatedContainer.visibility = VISIBLE
+
+        val stickerNumber = findViewById<TextView>(R.id.repeated_sticker_number)
+        stickerNumber.text = stickerBD.number
+
+        setBackgroundColor(resources.getColor(R.color.white, null))
+        setOnClickListener(null)
     }
 
     private fun stickerClick(view: View) {
@@ -45,5 +69,9 @@ class AlbumStickerButton(
         resources.getColor(R.color.marked_sticker, null)
     } else {
         resources.getColor(R.color.white, null)
+    }
+
+    fun setRepeatedTab(value: Boolean) {
+        init(value)
     }
 }

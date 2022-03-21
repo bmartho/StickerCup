@@ -1,17 +1,20 @@
 package br.cup.stickercontrol.album.ui
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.asLiveData
+import androidx.lifecycle.*
 import br.cup.stickercontrol.data.repositories.StickerRepository
 import br.cup.stickercontrol.model.Sticker
 
 class AlbumViewModel(private val repository: StickerRepository) : ViewModel() {
-    val allStickers : LiveData<List<Sticker>> = repository.getAllStickers().asLiveData()
+    private val _isRepeatedTab = MutableLiveData(false)
+    val isRepeatedTab: LiveData<Boolean> = _isRepeatedTab
+    val allStickers: LiveData<List<Sticker>> = repository.getAllStickers().asLiveData()
 
     suspend fun updateSticker(sticker: Sticker) {
         repository.updateSticker(sticker)
+    }
+
+    fun setRepeatedTab(value: Boolean) {
+        _isRepeatedTab.value = value
     }
 }
 

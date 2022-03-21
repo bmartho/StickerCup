@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Controle de figurinhas</string>
+    <string name="album_tab">Coladas</string>
+    <string name="repeated_tab">Repetidas</string>
+</resources>

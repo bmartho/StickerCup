@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">StickerCupControl</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="app_name">Sticker Control</string>
+    <string name="album_tab">Glued</string>
+    <string name="repeated_tab">Repeated</string>
 </resources>
