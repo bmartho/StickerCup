@@ -12,15 +12,16 @@ import br.cup.stickercontrol.model.Sticker
 
 @SuppressLint("ViewConstructor")
 class AlbumStickerButton(
-    context: Context,
-    private val stickerBD: Sticker,
-    private val updateSticker: UpdateStickerInterface
+    context: Context
 ) : ConstraintLayout(context) {
     private var gluedStickerNumber: TextView
     private var repeatedContainer: ConstraintLayout
     private var repeatedStickerQuantity: TextView
     private var buttonRepeatedPlus: Button
     private var buttonRepeatedMinus: Button
+
+    private lateinit var stickerBD: Sticker
+    private lateinit var updateSticker: UpdateStickerInterface
 
     init {
         inflate(context, R.layout.sticker_component, this)
@@ -30,11 +31,16 @@ class AlbumStickerButton(
         repeatedStickerQuantity = findViewById(R.id.repeated_sticker_quantity)
         buttonRepeatedPlus = findViewById(R.id.plus_repeated_sticker_button)
         buttonRepeatedMinus = findViewById(R.id.minus_repeated_sticker_button)
-
-        init()
     }
 
-    private fun init(isRepeatedTab: Boolean = false) {
+    fun init(
+        isRepeatedTab: Boolean,
+        sticker: Sticker,
+        updateStickerInterface: UpdateStickerInterface
+    ) {
+        stickerBD = sticker
+        updateSticker = updateStickerInterface
+
         if (isRepeatedTab) {
             configureRepeatedSticker()
         } else {
@@ -89,9 +95,5 @@ class AlbumStickerButton(
         resources.getColor(R.color.marked_sticker, null)
     } else {
         resources.getColor(R.color.white, null)
-    }
-
-    fun setRepeatedTab(value: Boolean) {
-        init(value)
     }
 }

@@ -36,7 +36,7 @@ class AlbumFragment : Fragment(), UpdateStickerInterface {
         albumViewModel.allStickers.observe(requireActivity()) { allStickers ->
             stickerList = allStickers
             if (allStickers.isNotEmpty()) {
-                adapter = StickersAdapter(buildAlbumStickerButtonObjects(allStickers))
+                adapter = StickersAdapter(allStickers, requireContext(), this)
                 binding.mainGrid.adapter = adapter
 
                 albumViewModel.setLoading(false)
@@ -51,17 +51,6 @@ class AlbumFragment : Fragment(), UpdateStickerInterface {
         }
 
         return binding.root
-    }
-
-    private fun buildAlbumStickerButtonObjects(
-        listStickers: List<Sticker>
-    ): List<AlbumStickerButton> {
-        val list = mutableListOf<AlbumStickerButton>()
-        listStickers.forEach { sticker ->
-            list.add(AlbumStickerButton(appContext, sticker, this))
-        }
-
-        return list
     }
 
     override fun updateSticker(sticker: Sticker) {
