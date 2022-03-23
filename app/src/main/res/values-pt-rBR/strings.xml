@@ -2,4 +2,5 @@
     <string name="app_name">Controle de figurinhas</string>
     <string name="album_tab">Coladas</string>
     <string name="repeated_tab">Repetidas</string>
+    <string name="loading_stickers">Carregando suas figurinhas…</string>
 </resources>

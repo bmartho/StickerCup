@@ -14,5 +14,8 @@ class Sticker(
     val number: String,
 
     @ColumnInfo(name = "isMarked")
-    var isMarked: Boolean
+    var isMarked: Boolean,
+
+    @ColumnInfo(name = "numRepeated")
+    var numRepeated: Int
 )

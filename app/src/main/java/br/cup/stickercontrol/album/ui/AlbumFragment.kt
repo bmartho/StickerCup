@@ -39,6 +39,7 @@ class AlbumFragment : Fragment(), UpdateStickerInterface {
                 adapter = StickersAdapter(buildAlbumStickerButtonObjects(allStickers))
                 binding.mainGrid.adapter = adapter
 
+                albumViewModel.setLoading(false)
                 albumViewModel.allStickers.removeObservers(requireActivity())
             }
         }

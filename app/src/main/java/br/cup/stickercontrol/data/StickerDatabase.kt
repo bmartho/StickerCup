@@ -37,7 +37,7 @@ abstract class StickerDatabase : RoomDatabase() {
         fun generateStickers(): List<Sticker> {
             val list = mutableListOf<Sticker>()
             for (stickerNumber in 1..NUMBER_OF_STICKERS) {
-                list.add(Sticker(stickerNumber, stickerNumber.toString(), false))
+                list.add(Sticker(stickerNumber, stickerNumber.toString(), false, 0))
             }
             return list
         }

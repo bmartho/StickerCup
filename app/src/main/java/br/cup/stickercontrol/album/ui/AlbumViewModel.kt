@@ -7,6 +7,9 @@ import br.cup.stickercontrol.model.Sticker
 class AlbumViewModel(private val repository: StickerRepository) : ViewModel() {
     private val _isRepeatedTab = MutableLiveData(false)
     val isRepeatedTab: LiveData<Boolean> = _isRepeatedTab
+    private val _isLoading = MutableLiveData(true)
+    val isLoading: LiveData<Boolean> = _isLoading
+
     val allStickers: LiveData<List<Sticker>> = repository.getAllStickers().asLiveData()
 
     suspend fun updateSticker(sticker: Sticker) {
@@ -15,6 +18,10 @@ class AlbumViewModel(private val repository: StickerRepository) : ViewModel() {
 
     fun setRepeatedTab(value: Boolean) {
         _isRepeatedTab.value = value
+    }
+
+    fun setLoading(value: Boolean) {
+        _isLoading.value = value
     }
 }
 

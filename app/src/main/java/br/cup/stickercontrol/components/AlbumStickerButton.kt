@@ -2,8 +2,8 @@ package br.cup.stickercontrol.components
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.view.LayoutInflater
 import android.view.View
+import android.widget.Button
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import br.cup.stickercontrol.R
@@ -18,14 +18,18 @@ class AlbumStickerButton(
 ) : ConstraintLayout(context) {
     private var gluedStickerNumber: TextView
     private var repeatedContainer: ConstraintLayout
+    private var repeatedStickerQuantity: TextView
+    private var buttonRepeatedPlus: Button
+    private var buttonRepeatedMinus: Button
 
     init {
-        val inflater: LayoutInflater =
-            context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        inflater.inflate(R.layout.sticker_component, this)
+        inflate(context, R.layout.sticker_component, this)
 
         gluedStickerNumber = findViewById(R.id.glued_sticker_number)
         repeatedContainer = findViewById(R.id.repeated_sticker_container)
+        repeatedStickerQuantity = findViewById(R.id.repeated_sticker_quantity)
+        buttonRepeatedPlus = findViewById(R.id.plus_repeated_sticker_button)
+        buttonRepeatedMinus = findViewById(R.id.minus_repeated_sticker_button)
 
         init()
     }
@@ -44,6 +48,7 @@ class AlbumStickerButton(
 
         gluedStickerNumber.text = stickerBD.number
         setBackgroundColor(getStickerColor())
+
         setOnClickListener(::stickerClick)
     }
 
@@ -56,6 +61,21 @@ class AlbumStickerButton(
 
         setBackgroundColor(resources.getColor(R.color.white, null))
         setOnClickListener(null)
+
+        repeatedStickerQuantity.text = stickerBD.numRepeated.toString()
+        buttonRepeatedPlus.setOnClickListener {
+            stickerBD.numRepeated = stickerBD.numRepeated + 1
+            repeatedStickerQuantity.text = stickerBD.numRepeated.toString()
+            updateSticker.updateSticker(stickerBD)
+        }
+
+        buttonRepeatedMinus.setOnClickListener {
+            if (stickerBD.numRepeated > 0) {
+                stickerBD.numRepeated = stickerBD.numRepeated - 1
+                repeatedStickerQuantity.text = stickerBD.numRepeated.toString()
+                updateSticker.updateSticker(stickerBD)
+            }
+        }
     }
 
     private fun stickerClick(view: View) {

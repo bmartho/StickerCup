@@ -1,5 +1,6 @@
 package br.cup.stickercontrol.album.ui
 
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
