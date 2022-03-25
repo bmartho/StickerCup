@@ -65,7 +65,7 @@ class AlbumStickerButton(
         val stickerNumber = findViewById<TextView>(R.id.repeated_sticker_number)
         stickerNumber.text = stickerBD.number
 
-        setBackgroundColor(resources.getColor(R.color.white, null))
+        setBackgroundColor(getRepeatedStickerColor())
         setOnClickListener(null)
 
         repeatedStickerQuantity.text = stickerBD.numRepeated.toString()
@@ -73,6 +73,7 @@ class AlbumStickerButton(
             stickerBD.numRepeated = stickerBD.numRepeated + 1
             repeatedStickerQuantity.text = stickerBD.numRepeated.toString()
             updateSticker.updateSticker(stickerBD)
+            this@AlbumStickerButton.setBackgroundColor(getRepeatedStickerColor())
         }
 
         buttonRepeatedMinus.setOnClickListener {
@@ -80,6 +81,7 @@ class AlbumStickerButton(
                 stickerBD.numRepeated = stickerBD.numRepeated - 1
                 repeatedStickerQuantity.text = stickerBD.numRepeated.toString()
                 updateSticker.updateSticker(stickerBD)
+                this@AlbumStickerButton.setBackgroundColor(getRepeatedStickerColor())
             }
         }
     }
@@ -93,6 +95,12 @@ class AlbumStickerButton(
 
     private fun getStickerColor() = if (stickerBD.isMarked) {
         resources.getColor(R.color.marked_sticker, null)
+    } else {
+        resources.getColor(R.color.white, null)
+    }
+
+    private fun getRepeatedStickerColor() = if (stickerBD.numRepeated > 0) {
+        resources.getColor(R.color.repeated_sticker, null)
     } else {
         resources.getColor(R.color.white, null)
     }

@@ -3,6 +3,11 @@
     <string name="album_tab">Glued</string>
     <string name="repeated_tab">Repeated</string>
     <string name="loading_stickers">Loading your stickers…</string>
+    <string name="menu_delete">Clean album</string>
+    <string name="action_bar_name">Sticker Album</string>
+    <string name="share">Share\nstickers</string>
+    <string name="clear_all">Clean\nAll</string>
+
     <string name="minus_sign" translatable="false">-</string>
     <string name="plus_sign" translatable="false">+</string>
 </resources>

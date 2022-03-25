@@ -7,4 +7,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="marked_sticker">#FF66BB6A</color>
+    <color name="repeated_sticker">#FFD5C187</color>
+    <color name="status_bar">#84887D</color>
+    <color name="action_bar">#CBD3C0</color>
 </resources>

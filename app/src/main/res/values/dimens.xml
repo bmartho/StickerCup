@@ -3,4 +3,14 @@
     <dimen name="tab_layout_layout_height">50dp</dimen>
     <dimen name="sticker_height">100dp</dimen>
     <dimen name="loading_min_height_width">50dp</dimen>
+
+    <dimen name="action_bar_title_size">18sp</dimen>
+    <dimen name="action_bar_images_size">32dp</dimen>
+    <dimen name="action_bar_images_padding_vertical">7dp</dimen>
+    <dimen name="action_bar_trash_padding">20dp</dimen>
+    <dimen name="action_bar_icon_text_size">8sp</dimen>
+
+    <dimen name="repeated_button_width">45dp</dimen>
+    <dimen name="repeated_button_height">20dp</dimen>
+    <dimen name="repeated_plus_button_margin_top">15dp</dimen>
 </resources>

@@ -1,17 +1,23 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/sticker_height"
+    android:layout_height="wrap_content"
     android:background="@drawable/sticker_border">
 
-    <TextView
-        android:id="@+id/glued_sticker_number"
+    <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/sticker_height"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/glued_sticker_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true" />
+    </RelativeLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/repeated_sticker_container"
@@ -29,8 +35,10 @@
 
         <Button
             android:id="@+id/plus_repeated_sticker_button"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
+            android:layout_width="@dimen/repeated_button_width"
+            android:layout_height="@dimen/repeated_button_height"
+            android:layout_marginTop="@dimen/repeated_plus_button_margin_top"
+            android:background="@drawable/round_button"
             android:text="@string/plus_sign"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -46,12 +54,15 @@
 
         <Button
             android:id="@+id/minus_repeated_sticker_button"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
+            android:layout_width="@dimen/repeated_button_width"
+            android:layout_height="@dimen/repeated_button_height"
+            android:background="@drawable/round_button"
+            android:gravity="center"
             android:text="@string/minus_sign"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent" />
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/repeated_sticker_quantity" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

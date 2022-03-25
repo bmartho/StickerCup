@@ -3,4 +3,8 @@
     <string name="album_tab">Coladas</string>
     <string name="repeated_tab">Repetidas</string>
     <string name="loading_stickers">Carregando suas figurinhas…</string>
+    <string name="menu_delete">Limpar álbum</string>
+    <string name="action_bar_name">Álbum de Figurinhas</string>
+    <string name="share">Compartilhar\nfigurinhas</string>
+    <string name="clear_all">Limpar\ntudo</string>
 </resources>
