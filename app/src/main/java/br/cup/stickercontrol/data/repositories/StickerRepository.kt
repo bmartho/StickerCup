@@ -10,4 +10,8 @@ class StickerRepository(private val dao: StickersDAO) {
     suspend fun updateSticker(sticker: Sticker) {
         dao.updateSticker(sticker)
     }
+
+    suspend fun clearAll() {
+        dao.clearAll()
+    }
 }

@@ -9,8 +9,9 @@
         android:id="@+id/mainGrid"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="5dp"
-        android:horizontalSpacing="5dp"
-        android:numColumns="5" />
+        android:layout_margin="@dimen/grid_margins"
+        android:horizontalSpacing="@dimen/grid_margins"
+        android:numColumns="5"
+        android:verticalSpacing="@dimen/grid_margins" />
 
 </FrameLayout>

@@ -7,4 +7,17 @@
     <string name="action_bar_name">Álbum de Figurinhas</string>
     <string name="share">Compartilhar\nfigurinhas</string>
     <string name="clear_all">Limpar\ntudo</string>
+    <string name="clear_all_dialog_title">Limpar todos os dados</string>
+    <string name="clear_all_dialog_body">Você tem certeza que você quer limpar todos os dados? Isso irá limpar tanto as figurinhas coladas quanto as repetidas. Não será possível reverter essa operação!</string>
+
+    <string name="share_stickers_missed">Figurinhas faltantes:</string>
+    <string name="share_stickers_repeated">Figurinhas repetidas:</string>
+
+    <string name="share_options_title">O que você gostaria de compartilhar?</string>
+    <string name="share_options_positive_button">Compartilhar</string>
+    <string name="share_options_error">Você não tem figurinhas para compartilhar</string>
+    <string-array name="share_options">
+        <item>Figurinhas faltantes</item>
+        <item>Figurinhas repetidas</item>
+    </string-array>
 </resources>

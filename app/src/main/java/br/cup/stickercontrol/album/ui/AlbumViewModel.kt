@@ -9,6 +9,16 @@ class AlbumViewModel(private val repository: StickerRepository) : ViewModel() {
     val isRepeatedTab: LiveData<Boolean> = _isRepeatedTab
     private val _isLoading = MutableLiveData(true)
     val isLoading: LiveData<Boolean> = _isLoading
+    private val _clearAll = MutableLiveData(false)
+    val clearAll: LiveData<Boolean> = _clearAll
+    private val _shareStickers = MutableLiveData(
+        ShareOptions(
+            missingStickers = false,
+            repeatedStickers = false
+        )
+    )
+
+    val shareStickers: LiveData<ShareOptions> = _shareStickers
 
     val allStickers: LiveData<List<Sticker>> = repository.getAllStickers().asLiveData()
 
@@ -23,6 +33,15 @@ class AlbumViewModel(private val repository: StickerRepository) : ViewModel() {
     fun setLoading(value: Boolean) {
         _isLoading.value = value
     }
+
+    suspend fun clearAll(value: Boolean) {
+        _clearAll.value = value
+        repository.clearAll()
+    }
+
+    fun shareStickers(value: ShareOptions) {
+        _shareStickers.value = value
+    }
 }
 
 class AlbumViewModelFactory(private val repository: StickerRepository) : ViewModelProvider.Factory {
@@ -33,4 +52,11 @@ class AlbumViewModelFactory(private val repository: StickerRepository) : ViewMod
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }
+}
+
+data class ShareOptions(
+    val missingStickers: Boolean,
+    val repeatedStickers: Boolean
+) {
+    fun isInvalid() = !missingStickers && !repeatedStickers
 }

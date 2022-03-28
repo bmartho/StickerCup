@@ -8,6 +8,7 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.ImageView
 import android.widget.LinearLayout
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.FragmentContainerView
@@ -15,7 +16,9 @@ import androidx.lifecycle.ViewModelProvider
 import br.cup.stickercontrol.album.ui.AlbumFragment
 import br.cup.stickercontrol.album.ui.AlbumViewModel
 import br.cup.stickercontrol.album.ui.AlbumViewModelFactory
+import br.cup.stickercontrol.album.ui.ShareOptions
 import com.google.android.material.tabs.TabLayout
+import kotlinx.coroutines.runBlocking
 
 class MainActivity : AppCompatActivity() {
     private lateinit var albumViewModel: AlbumViewModel
@@ -98,6 +101,41 @@ class MainActivity : AppCompatActivity() {
             }
             MotionEvent.ACTION_UP -> {
                 shareImage.setImageResource(R.drawable.share)
+
+                var missing = true
+                var repeated = true
+                val builder = AlertDialog.Builder(this)
+                builder.setTitle(getString(R.string.share_options_title))
+                    .setMultiChoiceItems(
+                        R.array.share_options, booleanArrayOf(true, true)
+                    ) { dialog, which, isChecked ->
+                        val positiveButton =
+                            (dialog as AlertDialog).getButton(AlertDialog.BUTTON_POSITIVE)
+
+                        if (isChecked) {
+                            if (which == 0) {
+                                missing = true
+                            } else {
+                                repeated = true
+                            }
+
+                        } else {
+                            if (which == 0) {
+                                missing = false
+                            } else {
+                                repeated = false
+                            }
+                        }
+
+                        positiveButton.isEnabled = !(!missing && !repeated)
+                    }
+                    .setPositiveButton(
+                        R.string.share_options_positive_button
+                    ) { _, _ ->
+                        albumViewModel.shareStickers(ShareOptions(missing, repeated))
+                    }
+                    .setNegativeButton(android.R.string.cancel, null)
+                    .create().show()
             }
         }
         true
@@ -110,6 +148,20 @@ class MainActivity : AppCompatActivity() {
             }
             MotionEvent.ACTION_UP -> {
                 clearAllImage.setImageResource(R.drawable.trash)
+
+                AlertDialog.Builder(this)
+                    .setTitle(getString(R.string.clear_all_dialog_title))
+                    .setMessage(getString(R.string.clear_all_dialog_body)) // Specifying a listener allows you to take an action before dismissing the dialog.
+                    .setPositiveButton(
+                        android.R.string.ok
+                    ) { _, _ ->
+                        runBlocking {
+                            albumViewModel.clearAll(true)
+                        }
+                    }
+                    .setNegativeButton(android.R.string.cancel, null)
+                    .setIcon(R.drawable.alert)
+                    .show()
             }
         }
         true

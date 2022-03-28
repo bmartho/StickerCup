@@ -17,4 +17,7 @@ interface StickersDAO {
 
     @Update
     suspend fun updateSticker(sticker: Sticker)
+
+    @Query("UPDATE sticker SET isMarked = 0, numRepeated = 0")
+    suspend fun clearAll()
 }

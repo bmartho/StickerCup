@@ -11,11 +11,9 @@ import br.cup.stickercontrol.model.Sticker
 class StickersAdapter constructor(
     private val listStickers: List<Sticker>,
     private val appContext: Context,
-    private val updateSticker: UpdateStickerInterface
-
+    private val updateSticker: UpdateStickerInterface,
+    private var isRepeatedTab: Boolean
 ) : BaseAdapter() {
-    private var isRepeatedTab = false
-
     override fun getCount(): Int {
         return listStickers.size
     }
