@@ -10,4 +10,5 @@
     <color name="repeated_sticker">#FFD5C187</color>
     <color name="status_bar">#84887D</color>
     <color name="action_bar">#CBD3C0</color>
+    <color name="selected_tab">#4E8F51</color>
 </resources>
