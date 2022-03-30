@@ -96,12 +96,12 @@ class AlbumStickerButton(
     private fun getStickerColor() = if (stickerBD.isMarked) {
         resources.getColor(R.color.marked_sticker, null)
     } else {
-        resources.getColor(R.color.white, null)
+        resources.getColor(R.color.sticker_background, null)
     }
 
     private fun getRepeatedStickerColor() = if (stickerBD.numRepeated > 0) {
         resources.getColor(R.color.repeated_sticker, null)
     } else {
-        resources.getColor(R.color.white, null)
+        resources.getColor(R.color.sticker_background, null)
     }
 }

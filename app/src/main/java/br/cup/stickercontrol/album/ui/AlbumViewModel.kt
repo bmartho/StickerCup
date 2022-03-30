@@ -18,6 +18,16 @@ class AlbumViewModel(private val repository: StickerRepository) : ViewModel() {
         )
     )
 
+    fun init(){
+        _isRepeatedTab.value = false
+        _isLoading.value = true
+        _clearAll.value = false
+        _shareStickers.value = ShareOptions(
+            missingStickers = false,
+            repeatedStickers = false
+        )
+    }
+
     val shareStickers: LiveData<ShareOptions> = _shareStickers
 
     val allStickers: LiveData<List<Sticker>> = repository.getAllStickers().asLiveData()

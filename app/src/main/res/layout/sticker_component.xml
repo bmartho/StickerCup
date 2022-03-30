@@ -16,7 +16,9 @@
             android:id="@+id/glued_sticker_number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true" />
+            android:layout_centerInParent="true"
+            android:textSize="16sp"
+            android:textColor="@color/grid_text_color" />
     </RelativeLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -29,6 +31,7 @@
             android:id="@+id/repeated_sticker_number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/grid_text_color"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -48,6 +51,7 @@
             android:id="@+id/repeated_sticker_quantity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/grid_text_color"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/plus_repeated_sticker_button" />

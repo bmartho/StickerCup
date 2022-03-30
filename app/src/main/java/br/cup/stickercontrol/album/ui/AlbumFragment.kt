@@ -37,7 +37,7 @@ class AlbumFragment : Fragment(), UpdateStickerInterface {
 
         albumViewModel = ViewModelProvider(requireActivity()).get(AlbumViewModel::class.java)
 
-        albumViewModel.allStickers.observe(requireActivity()) { allStickers ->
+        albumViewModel.allStickers.observe(viewLifecycleOwner) { allStickers ->
             if (updateGrid) {
                 stickerList = allStickers
                 if (allStickers.isNotEmpty()) {
@@ -50,20 +50,20 @@ class AlbumFragment : Fragment(), UpdateStickerInterface {
             }
         }
 
-        albumViewModel.isRepeatedTab.observe(requireActivity()) { value ->
+        albumViewModel.isRepeatedTab.observe(viewLifecycleOwner) { value ->
             isRepeatedTab = value
             if (stickerList.isNotEmpty()) {
                 adapter.setRepeatedTab(isRepeatedTab)
             }
         }
 
-        albumViewModel.clearAll.observe(requireActivity()) { clearAll ->
+        albumViewModel.clearAll.observe(viewLifecycleOwner) { clearAll ->
             if (clearAll) {
                 updateGrid = true
             }
         }
 
-        albumViewModel.shareStickers.observe(requireActivity()) { shareOptions ->
+        albumViewModel.shareStickers.observe(viewLifecycleOwner) { shareOptions ->
             if (!shareOptions.isInvalid()) {
                 if (hasStickersToShare(shareOptions)) {
                     val sendIntent: Intent = Intent().apply {

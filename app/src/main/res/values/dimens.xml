@@ -5,8 +5,8 @@
     <dimen name="loading_min_height_width">50dp</dimen>
     <dimen name="grid_margins">5dp</dimen>
 
-    <dimen name="action_bar_title_size">18sp</dimen>
-    <dimen name="action_bar_images_size">38dp</dimen>
+    <dimen name="action_bar_title_size">20sp</dimen>
+    <dimen name="action_bar_images_size">40dp</dimen>
     <dimen name="action_bar_images_padding_vertical">7dp</dimen>
     <dimen name="action_bar_trash_padding">20dp</dimen>
     <dimen name="action_bar_icon_text_size">8sp</dimen>

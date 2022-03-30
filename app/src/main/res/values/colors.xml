@@ -8,6 +8,8 @@
     <color name="white">#FFFFFFFF</color>
     <color name="marked_sticker">#FF66BB6A</color>
     <color name="repeated_sticker">#FFD5C187</color>
+    <color name="sticker_background">#FFFFFFFF</color>
+    <color name="grid_text_color">#FF000000</color>
     <color name="status_bar">#84887D</color>
     <color name="action_bar">#CBD3C0</color>
     <color name="selected_tab">#4E8F51</color>

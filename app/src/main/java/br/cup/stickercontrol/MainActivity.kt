@@ -46,6 +46,7 @@ class MainActivity : AppCompatActivity() {
             this,
             AlbumViewModelFactory((this.application as StickerControlApplication).repository)
         ).get(AlbumViewModel::class.java)
+        albumViewModel.init()
 
         supportFragmentManager.beginTransaction().apply {
             replace(
