@@ -11,7 +11,12 @@
     <dimen name="action_bar_trash_padding">20dp</dimen>
     <dimen name="action_bar_icon_text_size">8sp</dimen>
 
-    <dimen name="repeated_button_width">45dp</dimen>
-    <dimen name="repeated_button_height">20dp</dimen>
+    <dimen name="glued_sticker_number_text_size">16sp</dimen>
+    <dimen name="divider_height">1dp</dimen>
+    <dimen name="divider_margin_vertical">4dp</dimen>
+    <dimen name="repeated_sticker_number_margin_top">2dp</dimen>
+    <dimen name="repeated_button_width_height">25dp</dimen>
     <dimen name="repeated_plus_button_margin_top">15dp</dimen>
+    <dimen name="repeated_buttons_margin_to_text">2dp</dimen>
+    <dimen name="repeated_minus_button_margin_bottom">5dp</dimen>
 </resources>

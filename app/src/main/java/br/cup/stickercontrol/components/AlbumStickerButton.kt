@@ -2,8 +2,10 @@ package br.cup.stickercontrol.components
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.view.MotionEvent
 import android.view.View
 import android.widget.Button
+import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import br.cup.stickercontrol.R
@@ -19,6 +21,8 @@ class AlbumStickerButton(
     private var repeatedStickerQuantity: TextView
     private var buttonRepeatedPlus: Button
     private var buttonRepeatedMinus: Button
+    private var buttonLayoutRepeatedPlus: FrameLayout
+    private var buttonLayoutRepeatedMinus: FrameLayout
 
     private lateinit var stickerBD: Sticker
     private lateinit var updateSticker: UpdateStickerInterface
@@ -31,6 +35,8 @@ class AlbumStickerButton(
         repeatedStickerQuantity = findViewById(R.id.repeated_sticker_quantity)
         buttonRepeatedPlus = findViewById(R.id.plus_repeated_sticker_button)
         buttonRepeatedMinus = findViewById(R.id.minus_repeated_sticker_button)
+        buttonLayoutRepeatedPlus = findViewById(R.id.plus_repeated_sticker_button_layout)
+        buttonLayoutRepeatedMinus = findViewById(R.id.minus_repeated_sticker_button_layout)
     }
 
     fun init(
@@ -58,6 +64,7 @@ class AlbumStickerButton(
         setOnClickListener(::stickerClick)
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private fun configureRepeatedSticker() {
         gluedStickerNumber.visibility = GONE
         repeatedContainer.visibility = VISIBLE
@@ -68,6 +75,7 @@ class AlbumStickerButton(
         setBackgroundColor(getRepeatedStickerColor())
         setOnClickListener(null)
 
+        buttonLayoutRepeatedPlus.setOnTouchListener(plusLayoutClickEvent)
         repeatedStickerQuantity.text = stickerBD.numRepeated.toString()
         buttonRepeatedPlus.setOnClickListener {
             stickerBD.numRepeated = stickerBD.numRepeated + 1
@@ -76,6 +84,7 @@ class AlbumStickerButton(
             this@AlbumStickerButton.setBackgroundColor(getRepeatedStickerColor())
         }
 
+        buttonLayoutRepeatedMinus.setOnTouchListener(minusLayoutClickEvent)
         buttonRepeatedMinus.setOnClickListener {
             if (stickerBD.numRepeated > 0) {
                 stickerBD.numRepeated = stickerBD.numRepeated - 1
@@ -103,5 +112,34 @@ class AlbumStickerButton(
         resources.getColor(R.color.repeated_sticker, null)
     } else {
         resources.getColor(R.color.sticker_background, null)
+    }
+
+    private val plusLayoutClickEvent: (View, MotionEvent) -> Boolean = { _, arg1 ->
+        when (arg1.action) {
+            MotionEvent.ACTION_DOWN -> {
+                buttonRepeatedPlus.isPressed = true
+            }
+            MotionEvent.ACTION_UP -> {
+                buttonRepeatedPlus.isPressed = false
+                buttonRepeatedPlus.performClick()
+            }
+            MotionEvent.ACTION_CANCEL -> {
+                buttonRepeatedPlus.isPressed = false
+            }
+        }
+        true
+    }
+
+    private val minusLayoutClickEvent: (View, MotionEvent) -> Boolean = { _, arg1 ->
+        when (arg1.action) {
+            MotionEvent.ACTION_DOWN -> {
+                buttonRepeatedMinus.isPressed = true
+            }
+            MotionEvent.ACTION_UP -> {
+                buttonRepeatedMinus.isPressed = false
+                buttonRepeatedMinus.performClick()
+            }
+        }
+        true
     }
 }

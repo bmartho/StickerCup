@@ -17,8 +17,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:textSize="16sp"
-            android:textColor="@color/grid_text_color" />
+            android:textColor="@color/grid_text_color"
+            android:textSize="@dimen/glued_sticker_number_text_size" />
     </RelativeLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -31,42 +31,71 @@
             android:id="@+id/repeated_sticker_number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/repeated_sticker_number_margin_top"
             android:textColor="@color/grid_text_color"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            android:id="@+id/plus_repeated_sticker_button"
-            android:layout_width="@dimen/repeated_button_width"
-            android:layout_height="@dimen/repeated_button_height"
-            android:layout_marginTop="@dimen/repeated_plus_button_margin_top"
-            android:background="@drawable/round_button"
-            android:text="@string/plus_sign"
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/divider_height"
+            android:layout_marginVertical="@dimen/divider_margin_vertical"
+            android:background="@color/black"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/repeated_sticker_number" />
+
+        <FrameLayout
+            android:id="@+id/plus_repeated_sticker_button_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/divider">
+
+            <Button
+                android:id="@+id/plus_repeated_sticker_button"
+                android:layout_width="@dimen/repeated_button_width_height"
+                android:layout_height="@dimen/repeated_button_width_height"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/repeated_plus_button_margin_top"
+                android:layout_marginBottom="@dimen/repeated_buttons_margin_to_text"
+                android:background="@drawable/round_button"
+                android:text="@string/plus_sign" />
+        </FrameLayout>
 
         <TextView
             android:id="@+id/repeated_sticker_quantity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/grid_text_color"
+            android:textStyle="bold"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/plus_repeated_sticker_button" />
+            app:layout_constraintTop_toBottomOf="@id/plus_repeated_sticker_button_layout" />
 
-        <Button
-            android:id="@+id/minus_repeated_sticker_button"
-            android:layout_width="@dimen/repeated_button_width"
-            android:layout_height="@dimen/repeated_button_height"
-            android:background="@drawable/round_button"
-            android:gravity="center"
-            android:text="@string/minus_sign"
+        <FrameLayout
+            android:id="@+id/minus_repeated_sticker_button_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/repeated_sticker_quantity" />
+            app:layout_constraintTop_toBottomOf="@id/repeated_sticker_quantity">
+
+            <Button
+                android:id="@+id/minus_repeated_sticker_button"
+                android:layout_width="@dimen/repeated_button_width_height"
+                android:layout_height="@dimen/repeated_button_width_height"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/repeated_buttons_margin_to_text"
+                android:layout_marginBottom="@dimen/repeated_minus_button_margin_bottom"
+                android:background="@drawable/round_button"
+                android:gravity="center"
+                android:text="@string/minus_sign" />
+        </FrameLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
