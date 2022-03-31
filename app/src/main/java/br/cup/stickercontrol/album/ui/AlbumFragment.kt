@@ -48,6 +48,8 @@ class AlbumFragment : Fragment(), UpdateStickerInterface {
                     updateGrid = false
                 }
             }
+
+            updateTotalStickerText()
         }
 
         albumViewModel.isRepeatedTab.observe(viewLifecycleOwner) { value ->
@@ -87,6 +89,13 @@ class AlbumFragment : Fragment(), UpdateStickerInterface {
         return binding.root
     }
 
+    private fun updateTotalStickerText() {
+        val totalMarked = stickerList.filter { sticker -> sticker.isMarked }.size
+        val percentOfAlbum: Double = (totalMarked.toDouble() / stickerList.size) * 100
+        binding.totalStickersText.text =
+            getString(R.string.total_stickers, totalMarked, stickerList.size, percentOfAlbum)
+    }
+
     private fun hasStickersToShare(shareOptions: ShareOptions): Boolean {
         var value = false
         for (sticker in stickerList) {
@@ -112,16 +121,13 @@ class AlbumFragment : Fragment(), UpdateStickerInterface {
     private fun getShareString(shareOptions: ShareOptions): String {
         var stringToShare = ""
         if (shareOptions.missingStickers) {
-            var missingNumbers = ""
-            stickerList.forEach { sticker ->
-                if (!sticker.isMarked) {
-                    missingNumbers = if (missingNumbers.isBlank()) {
-                        missingNumbers.plus(sticker.number)
-                    } else {
-                        missingNumbers.plus(", " + sticker.number)
-                    }
+            val missingNumbers = stickerList
+                .filter { sticker ->
+                    !sticker.isMarked
                 }
-            }
+                .joinToString(", ") { sticker ->
+                    sticker.number
+                }
 
             if (missingNumbers.isNotBlank()) {
                 stringToShare = stringToShare.plus(getString(R.string.share_stickers_missed))
@@ -135,17 +141,14 @@ class AlbumFragment : Fragment(), UpdateStickerInterface {
                 stringToShare = stringToShare.plus("\n\n")
             }
 
-            var repeatedNumbers = ""
-            stickerList.forEach { sticker ->
-                if (sticker.numRepeated > 0) {
-                    repeatedNumbers = if (repeatedNumbers.isBlank()) {
-                        repeatedNumbers.plus(sticker.number)
-                    } else {
-                        repeatedNumbers.plus(", " + sticker.number)
+            val repeatedNumbers =
+                stickerList
+                    .filter { sticker ->
+                        sticker.numRepeated > 0
                     }
-                    repeatedNumbers = repeatedNumbers.plus("(" + sticker.numRepeated + ")")
-                }
-            }
+                    .joinToString(", ") { sticker ->
+                        sticker.number.plus("(" + sticker.numRepeated + ")")
+                    }
 
             if (repeatedNumbers.isNotBlank()) {
                 stringToShare = stringToShare.plus(getString(R.string.share_stickers_repeated))

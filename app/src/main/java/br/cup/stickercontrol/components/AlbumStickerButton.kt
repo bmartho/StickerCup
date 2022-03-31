@@ -93,6 +93,9 @@ class AlbumStickerButton(
                 this@AlbumStickerButton.setBackgroundColor(getRepeatedStickerColor())
             }
         }
+
+        buttonRepeatedPlus.isPressed = false
+        buttonRepeatedMinus.isPressed = false
     }
 
     private fun stickerClick(view: View) {
@@ -138,6 +141,9 @@ class AlbumStickerButton(
             MotionEvent.ACTION_UP -> {
                 buttonRepeatedMinus.isPressed = false
                 buttonRepeatedMinus.performClick()
+            }
+            MotionEvent.ACTION_CANCEL -> {
+                buttonRepeatedMinus.isPressed = false
             }
         }
         true

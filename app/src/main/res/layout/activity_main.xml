@@ -35,7 +35,6 @@
             app:layout_constraintTop_toBottomOf="@id/progressBar" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/mainFragment"
         android:layout_width="match_parent"

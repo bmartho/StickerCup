@@ -1,17 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".album.ui.AlbumFragment">
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:id="@+id/totalStickersLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/total_sticker_layout">
+
+        <TextView
+            android:id="@+id/totalStickersText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/total_stickers_margins"
+            android:textColor="@color/grid_text_color"
+            android:textStyle="bold" />
+    </FrameLayout>
 
     <GridView
         android:id="@+id/mainGrid"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_margin="@dimen/grid_margins"
         android:horizontalSpacing="@dimen/grid_margins"
         android:numColumns="5"
         android:verticalSpacing="@dimen/grid_margins" />
-
-</FrameLayout>
+</LinearLayout>
