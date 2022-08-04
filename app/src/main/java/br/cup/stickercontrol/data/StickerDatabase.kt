@@ -73,7 +73,7 @@ abstract class StickerDatabase : RoomDatabase() {
 //TO THE FUTURE
 val MIGRATION_1_2 = object : Migration(1, 2) {
     override fun migrate(database: SupportSQLiteDatabase) {
-        database.execSQL("UPDATE sticker SET number = 'abc' WHERE id = 5")
+        //database.execSQL("UPDATE sticker SET number = '00' WHERE id = 1")
+        //database.execSQL("INSERT INTO sticker VALUES(671, '671', false, 0)")
     }
 }
-
