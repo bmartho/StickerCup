@@ -39,7 +39,6 @@
         android:id="@+id/mainFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="@dimen/tab_layout_layout_height"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -49,7 +48,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/tab_layout_layout_height"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/adView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:tabBackground="@drawable/tab_color_selector"
@@ -67,4 +66,19 @@
             android:layout_height="match_parent"
             android:text="@string/repeated_tab" />
     </com.google.android.material.tabs.TabLayout>
+
+    <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/adView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        ads:adSize="BANNER"
+        ads:adUnitId="ca-app-pub-3940256099942544/6300978111"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!--Test: ads:adUnitId="ca-app-pub-3940256099942544/6300978111"-->
+    <!--Real: ads:adUnitId="ca-app-pub-7952920523342900/7290299408"-->
+
 </androidx.constraintlayout.widget.ConstraintLayout>

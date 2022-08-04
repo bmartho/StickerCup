@@ -6,17 +6,23 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
+import android.widget.GridView
 import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.updateMargins
 import androidx.fragment.app.FragmentContainerView
 import androidx.lifecycle.ViewModelProvider
 import br.cup.stickercontrol.album.ui.AlbumFragment
 import br.cup.stickercontrol.album.ui.AlbumViewModel
 import br.cup.stickercontrol.album.ui.AlbumViewModelFactory
 import br.cup.stickercontrol.album.ui.ShareOptions
+import com.google.android.gms.ads.AdListener
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 import com.google.android.material.tabs.TabLayout
 import kotlinx.coroutines.runBlocking
 
@@ -27,6 +33,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var tabLayout: TabLayout
     private lateinit var mainFragment: FragmentContainerView
     private lateinit var loading: ConstraintLayout
+    private lateinit var mAdView: AdView
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,6 +48,7 @@ class MainActivity : AppCompatActivity() {
         loading = findViewById(R.id.loading_container)
         clearAllImage = findViewById(R.id.clear_all_image)
         shareImage = findViewById(R.id.share_image)
+        mAdView = findViewById(R.id.adView)
 
         albumViewModel = ViewModelProvider(
             this,
@@ -70,11 +78,38 @@ class MainActivity : AppCompatActivity() {
             if (isLoading) {
                 tabLayout.visibility = GONE
                 mainFragment.visibility = GONE
+                mAdView.visibility = GONE
                 loading.visibility = VISIBLE
             } else {
                 tabLayout.visibility = VISIBLE
                 mainFragment.visibility = VISIBLE
                 loading.visibility = GONE
+
+                initializeAdMob()
+            }
+        }
+    }
+
+    private fun initializeAdMob() {
+        MobileAds.initialize(this)
+
+        val adRequest = AdRequest.Builder().build()
+        mAdView.loadAd(adRequest)
+        mAdView.adListener = object : AdListener() {
+            override fun onAdLoaded() {
+                mAdView.visibility = VISIBLE
+
+                mAdView.adSize?.let { adSize ->
+                    val mainGrid = findViewById<GridView>(R.id.mainGrid)
+                    val params = mainGrid.layoutParams as LinearLayout.LayoutParams
+                    val valueInPixels = resources.getDimension(R.dimen.grid_margin_bottom).toInt()
+                    params.updateMargins(
+                        bottom = valueInPixels + adSize.getHeightInPixels(
+                            applicationContext
+                        )
+                    )
+                    mainGrid.layoutParams = params
+                }
             }
         }
     }

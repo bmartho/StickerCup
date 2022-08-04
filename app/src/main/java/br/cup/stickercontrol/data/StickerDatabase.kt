@@ -47,7 +47,7 @@ abstract class StickerDatabase : RoomDatabase() {
         @Volatile
         private var INSTANCE: StickerDatabase? = null
 
-        private const val NUMBER_OF_STICKERS = 500
+        private const val NUMBER_OF_STICKERS = 670
 
         fun getDatabase(
             context: Context,

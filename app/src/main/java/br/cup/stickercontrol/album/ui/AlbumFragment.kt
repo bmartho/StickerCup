@@ -147,7 +147,11 @@ class AlbumFragment : Fragment(), UpdateStickerInterface {
                         sticker.numRepeated > 0
                     }
                     .joinToString(", ") { sticker ->
-                        sticker.number.plus("(" + sticker.numRepeated + ")")
+                        if(sticker.numRepeated > 1) {
+                            sticker.number.plus("(" + sticker.numRepeated + ")")
+                        } else {
+                            sticker.number
+                        }
                     }
 
             if (repeatedNumbers.isNotBlank()) {

@@ -13,7 +13,7 @@
     <string name="minus_sign" translatable="false">-</string>
     <string name="plus_sign" translatable="false">+</string>
 
-    <string name="share_stickers_missed">Stickers that I don\'t have:</string>
+    <string name="share_stickers_missed">Stickers I don\'t have:</string>
     <string name="share_stickers_repeated">Repeated stickers</string>
 
     <string name="share_options_title">What would you like to share?</string>

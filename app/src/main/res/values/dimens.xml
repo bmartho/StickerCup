@@ -4,6 +4,7 @@
     <dimen name="sticker_height">100dp</dimen>
     <dimen name="loading_min_height_width">50dp</dimen>
     <dimen name="grid_margins">5dp</dimen>
+    <dimen name="grid_margin_bottom">55dp</dimen>
     <dimen name="total_stickers_margins">6dp</dimen>
 
     <dimen name="action_bar_title_size">20sp</dimen>

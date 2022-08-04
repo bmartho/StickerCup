@@ -23,7 +23,9 @@
         android:id="@+id/mainGrid"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/grid_margins"
+        android:layout_marginHorizontal="@dimen/grid_margins"
+        android:layout_marginTop="@dimen/grid_margins"
+        android:layout_marginBottom="@dimen/grid_margin_bottom"
         android:horizontalSpacing="@dimen/grid_margins"
         android:numColumns="5"
         android:verticalSpacing="@dimen/grid_margins" />
