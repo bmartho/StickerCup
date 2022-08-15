@@ -111,15 +111,31 @@ class AlbumStickerButton(
     }
 
     private fun getStickerColor() = if (stickerBD.isMarked) {
-        resources.getColor(R.color.marked_sticker, null)
+        if (isStrongStickerNumber()) {
+            resources.getColor(R.color.marked_sticker_strong, null)
+        } else {
+            resources.getColor(R.color.marked_sticker, null)
+        }
     } else {
-        resources.getColor(R.color.sticker_background, null)
+        if (isStrongStickerNumber()) {
+            resources.getColor(R.color.sticker_background_strong, null)
+        } else {
+            resources.getColor(R.color.sticker_background, null)
+        }
     }
 
     private fun getRepeatedStickerColor() = if (stickerBD.numRepeated > 0) {
-        resources.getColor(R.color.repeated_sticker, null)
+        if (isStrongStickerNumber()) {
+            resources.getColor(R.color.repeated_sticker_strong, null)
+        } else {
+            resources.getColor(R.color.repeated_sticker, null)
+        }
     } else {
-        resources.getColor(R.color.sticker_background, null)
+        if (isStrongStickerNumber()) {
+            resources.getColor(R.color.sticker_background_strong, null)
+        } else {
+            resources.getColor(R.color.sticker_background, null)
+        }
     }
 
     private val plusLayoutClickEvent: (View, MotionEvent) -> Boolean = { _, arg1 ->
@@ -152,5 +168,13 @@ class AlbumStickerButton(
             }
         }
         true
+    }
+
+    private fun isStrongStickerNumber() = if (stickerBD.id <= 20) {
+        false
+    } else {
+        if (stickerBD.id % 20 != 0 && (stickerBD.id / 20) % 2 == 0) {
+            false
+        } else !(stickerBD.id % 20 == 0 && (stickerBD.id / 20) % 2 == 1)
     }
 }
