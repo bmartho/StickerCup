@@ -2,6 +2,7 @@
 <resources>
     <dimen name="tab_layout_layout_height">50dp</dimen>
     <dimen name="sticker_height">100dp</dimen>
+    <dimen name="sticker_label_margin_top">25dp</dimen>
     <dimen name="loading_min_height_width">50dp</dimen>
     <dimen name="grid_margins">5dp</dimen>
     <dimen name="grid_margin_bottom">55dp</dimen>

@@ -17,6 +17,7 @@ class AlbumStickerButton(
     context: Context
 ) : ConstraintLayout(context) {
     private var gluedStickerNumber: TextView
+    private var gluedStickerLabel: TextView
     private var repeatedContainer: ConstraintLayout
     private var repeatedStickerQuantity: TextView
     private var buttonRepeatedPlus: Button
@@ -31,6 +32,7 @@ class AlbumStickerButton(
         inflate(context, R.layout.sticker_component, this)
 
         gluedStickerNumber = findViewById(R.id.glued_sticker_number)
+        gluedStickerLabel = findViewById(R.id.glued_sticker_label)
         repeatedContainer = findViewById(R.id.repeated_sticker_container)
         repeatedStickerQuantity = findViewById(R.id.repeated_sticker_quantity)
         buttonRepeatedPlus = findViewById(R.id.plus_repeated_sticker_button)
@@ -56,9 +58,11 @@ class AlbumStickerButton(
 
     private fun configureGluedSticker() {
         gluedStickerNumber.visibility = VISIBLE
+        gluedStickerLabel.visibility = VISIBLE
         repeatedContainer.visibility = GONE
 
         gluedStickerNumber.text = stickerBD.number
+        gluedStickerLabel.text = stickerBD.label
         setBackgroundColor(getStickerColor())
 
         setOnClickListener(::stickerClick)
@@ -67,10 +71,11 @@ class AlbumStickerButton(
     @SuppressLint("ClickableViewAccessibility")
     private fun configureRepeatedSticker() {
         gluedStickerNumber.visibility = GONE
+        gluedStickerLabel.visibility = GONE
         repeatedContainer.visibility = VISIBLE
 
         val stickerNumber = findViewById<TextView>(R.id.repeated_sticker_number)
-        stickerNumber.text = stickerBD.number
+        stickerNumber.text = "${stickerBD.label} ${stickerBD.number}"
 
         setBackgroundColor(getRepeatedStickerColor())
         setOnClickListener(null)

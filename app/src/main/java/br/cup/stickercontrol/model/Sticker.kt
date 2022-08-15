@@ -10,6 +10,9 @@ class Sticker(
     @ColumnInfo(name = "id")
     val id: Int,
 
+    @ColumnInfo(name = "label")
+    val label: String,
+
     @ColumnInfo(name = "number")
     val number: String,
 

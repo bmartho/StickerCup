@@ -126,7 +126,7 @@ class AlbumFragment : Fragment(), UpdateStickerInterface {
                     !sticker.isMarked
                 }
                 .joinToString(", ") { sticker ->
-                    sticker.number
+                    "${sticker.label}${sticker.number}"
                 }
 
             if (missingNumbers.isNotBlank()) {
@@ -147,10 +147,10 @@ class AlbumFragment : Fragment(), UpdateStickerInterface {
                         sticker.numRepeated > 0
                     }
                     .joinToString(", ") { sticker ->
-                        if(sticker.numRepeated > 1) {
-                            sticker.number.plus("(" + sticker.numRepeated + ")")
+                        if (sticker.numRepeated > 1) {
+                            "${sticker.label}${sticker.number}".plus("(" + sticker.numRepeated + ")")
                         } else {
-                            sticker.number
+                            "${sticker.label}${sticker.number}"
                         }
                     }
 

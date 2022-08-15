@@ -6,11 +6,12 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
+import br.cup.stickercontrol.listOfSessions
 import br.cup.stickercontrol.model.Sticker
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-@Database(entities = [Sticker::class], version = 1, exportSchema = false)
+@Database(entities = [Sticker::class], version = 2, exportSchema = false)
 abstract class StickerDatabase : RoomDatabase() {
     abstract fun stickersDAO(): StickersDAO
 
@@ -27,6 +28,16 @@ abstract class StickerDatabase : RoomDatabase() {
             }
         }
 
+        override fun onDestructiveMigration(db: SupportSQLiteDatabase) {
+            super.onDestructiveMigration(db)
+
+            INSTANCE?.let { database ->
+                scope.launch {
+                    populateDatabase(database.stickersDAO())
+                }
+            }
+        }
+
         fun populateDatabase(stickersDAO: StickersDAO) {
             // Delete all content here.
             stickersDAO.deleteAll()
@@ -36,8 +47,27 @@ abstract class StickerDatabase : RoomDatabase() {
 
         fun generateStickers(): List<Sticker> {
             val list = mutableListOf<Sticker>()
-            for (stickerNumber in 1..NUMBER_OF_STICKERS) {
-                list.add(Sticker(stickerNumber, stickerNumber.toString(), false, 0))
+            var stickerId = 1
+            for (session in listOfSessions) {
+                for (sessionStickerNumber in 1..session.second) {
+                    val numberOfSticker =
+                        if (sessionStickerNumber < 10) {
+                            "0".plus(sessionStickerNumber)
+                        } else {
+                            sessionStickerNumber.toString()
+                        }
+
+                    list.add(
+                        Sticker(
+                            id = stickerId,
+                            label = session.first,
+                            number = numberOfSticker,
+                            isMarked = false,
+                            numRepeated = 0
+                        )
+                    )
+                    stickerId++
+                }
             }
             return list
         }
@@ -46,8 +76,6 @@ abstract class StickerDatabase : RoomDatabase() {
     companion object {
         @Volatile
         private var INSTANCE: StickerDatabase? = null
-
-        private const val NUMBER_OF_STICKERS = 670
 
         fun getDatabase(
             context: Context,
@@ -59,7 +87,8 @@ abstract class StickerDatabase : RoomDatabase() {
                     StickerDatabase::class.java,
                     "sticker_database"
                 ).addCallback(StickerDatabaseCallback(scope))
-                    .addMigrations(MIGRATION_1_2)
+                    .fallbackToDestructiveMigration()
+                    .addMigrations(MIGRATION_2_3)
                     .build()
 
                 INSTANCE = instance
@@ -71,9 +100,10 @@ abstract class StickerDatabase : RoomDatabase() {
 }
 
 //TO THE FUTURE
-val MIGRATION_1_2 = object : Migration(1, 2) {
+val MIGRATION_2_3 = object : Migration(2, 3) {
     override fun migrate(database: SupportSQLiteDatabase) {
         //database.execSQL("UPDATE sticker SET number = '00' WHERE id = 1")
         //database.execSQL("INSERT INTO sticker VALUES(671, '671', false, 0)")
     }
 }
+
