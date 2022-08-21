@@ -1,9 +1,8 @@
 package br.cup.stickercontrol
 
 val listOfSessions: List<Pair<String, Int>> = listOf(
-    Pair("INT", 7),
-    Pair("STA", 8),
-    Pair("POS", 5),
+    Pair("", 1),
+    Pair("FWC", 18),
     Pair("QAT", 20),
     Pair("ECU", 20),
     Pair("SEN", 20),
@@ -36,5 +35,6 @@ val listOfSessions: List<Pair<String, Int>> = listOf(
     Pair("GAN", 20),
     Pair("URU", 20),
     Pair("KOR", 20),
-    Pair("LEG", 10)
+    Pair("FWC", 11),
+    Pair("C", 8)
 )

@@ -48,26 +48,41 @@ abstract class StickerDatabase : RoomDatabase() {
         fun generateStickers(): List<Sticker> {
             val list = mutableListOf<Sticker>()
             var stickerId = 1
+            var sessionNumber = 1
             for (session in listOfSessions) {
-                for (sessionStickerNumber in 1..session.second) {
-                    val numberOfSticker =
-                        if (sessionStickerNumber < 10) {
+                if (sessionNumber == 1) {
+                    list.add(
+                        Sticker(
+                            id = stickerId,
+                            label = "00",
+                            number = "",
+                            isMarked = false,
+                            numRepeated = 0
+                        )
+                    )
+                } else {
+                    for (sessionStickerNumber in 1..session.second) {
+                        val numberOfSticker = if (sessionNumber == listOfSessions.size - 1) {
+                            (18 + sessionStickerNumber).toString()
+                        } else if (sessionStickerNumber < 10) {
                             "0".plus(sessionStickerNumber)
                         } else {
                             sessionStickerNumber.toString()
                         }
 
-                    list.add(
-                        Sticker(
-                            id = stickerId,
-                            label = session.first,
-                            number = numberOfSticker,
-                            isMarked = false,
-                            numRepeated = 0
+                        list.add(
+                            Sticker(
+                                id = stickerId,
+                                label = session.first,
+                                number = numberOfSticker,
+                                isMarked = false,
+                                numRepeated = 0
+                            )
                         )
-                    )
-                    stickerId++
+                        stickerId++
+                    }
                 }
+                sessionNumber++
             }
             return list
         }

@@ -63,6 +63,11 @@ class AlbumStickerButton(
 
         gluedStickerNumber.text = stickerBD.number
         gluedStickerLabel.text = stickerBD.label
+
+        if (gluedStickerNumber.text.isEmpty()) {
+            gluedStickerNumber.visibility = GONE
+        }
+
         setBackgroundColor(getStickerColor())
 
         setOnClickListener(::stickerClick)
@@ -170,11 +175,13 @@ class AlbumStickerButton(
         true
     }
 
-    private fun isStrongStickerNumber() = if (stickerBD.id <= 20) {
+    private fun isStrongStickerNumber() = if (stickerBD.id <= 18) {
+        false
+    } else if (stickerBD.id >= 670) {
         false
     } else {
-        if (stickerBD.id % 20 != 0 && (stickerBD.id / 20) % 2 == 0) {
+        if ((stickerBD.id + 2) % 20 != 0 && ((stickerBD.id + 2) / 20) % 2 == 0) {
             false
-        } else !(stickerBD.id % 20 == 0 && (stickerBD.id / 20) % 2 == 1)
+        } else !((stickerBD.id + 2) % 20 == 0 && ((stickerBD.id + 2) / 20) % 2 == 1)
     }
 }
