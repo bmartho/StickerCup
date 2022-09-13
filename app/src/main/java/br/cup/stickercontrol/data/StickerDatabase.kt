@@ -11,7 +11,7 @@ import br.cup.stickercontrol.model.Sticker
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-@Database(entities = [Sticker::class], version = 2, exportSchema = false)
+@Database(entities = [Sticker::class], version = 3, exportSchema = false)
 abstract class StickerDatabase : RoomDatabase() {
     abstract fun stickersDAO(): StickersDAO
 
@@ -102,7 +102,7 @@ abstract class StickerDatabase : RoomDatabase() {
                     StickerDatabase::class.java,
                     "sticker_database"
                 ).addCallback(StickerDatabaseCallback(scope))
-                    .fallbackToDestructiveMigration()
+                    .addMigrations(MIGRATION_1_2)
                     .addMigrations(MIGRATION_2_3)
                     .build()
 
@@ -114,11 +114,23 @@ abstract class StickerDatabase : RoomDatabase() {
     }
 }
 
-//TO THE FUTURE
+val MIGRATION_1_2 = object : Migration(1, 2) {
+    override fun migrate(database: SupportSQLiteDatabase) {
+        //nothing
+    }
+}
+
 val MIGRATION_2_3 = object : Migration(2, 3) {
     override fun migrate(database: SupportSQLiteDatabase) {
-        //database.execSQL("UPDATE sticker SET number = '00' WHERE id = 1")
-        //database.execSQL("INSERT INTO sticker VALUES(671, '671', false, 0)")
+        database.execSQL("UPDATE sticker SET label = 'IRN' WHERE label = 'IRA'")
+        database.execSQL("UPDATE sticker SET label = 'KSA' WHERE label = 'ARA'")
+        database.execSQL("UPDATE sticker SET label = 'ESP' WHERE label = 'SPA'")
+        database.execSQL("UPDATE sticker SET label = 'CRC' WHERE label = 'COS'")
+        database.execSQL("UPDATE sticker SET label = 'JPN' WHERE label = 'JAP'")
+        database.execSQL("UPDATE sticker SET label = 'SRB' WHERE label = 'SER'")
+        database.execSQL("UPDATE sticker SET label = 'SUI' WHERE label = 'SWL'")
+        database.execSQL("UPDATE sticker SET label = 'CMR' WHERE label = 'CAM'")
+        database.execSQL("UPDATE sticker SET label = 'GHA' WHERE label = 'GAN'")
     }
 }
 
